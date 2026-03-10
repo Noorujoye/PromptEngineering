@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { useMemo } from 'react'
-import { useTheme } from './useTheme'
+import { useTheme } from '../theme/useTheme'
 
 function navLinkClassName({ isActive }) {
   return [

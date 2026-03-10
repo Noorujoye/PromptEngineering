@@ -53,7 +53,11 @@ Notes:
 
 ```text
 src/
-	components/   # Navbar, Sidebar, Layout, cards, markdown renderer
-	pages/        # Home + topic pages
-	data/         # Topic metadata + markdown content
+	layout/               # App shell (Layout, Navbar, Sidebar)
+	theme/                # Theme context/provider + hook
+	components/content/    # Reusable content UI (MarkdownArticle, TopicCard)
+	features/playground/   # PromptPlayground feature
+	pages/                 # Home + topic pages
+	data/                  # Topic metadata + markdown content
+	styles/                # Global styles / Tailwind entry
 ```

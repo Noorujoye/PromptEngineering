@@ -1,5 +1,5 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import Layout from './components/Layout'
+import Layout from './layout/Layout'
 import Home from './pages/Home'
 import Basics from './pages/Basics'
 import PromptTypes from './pages/PromptTypes'

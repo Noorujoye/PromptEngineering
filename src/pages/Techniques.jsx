@@ -1,4 +1,4 @@
-import MarkdownArticle from '../components/MarkdownArticle'
+import MarkdownArticle from '../components/content/MarkdownArticle'
 import { CONTENT_BY_ID } from '../data/content'
 
 export default function Techniques() {

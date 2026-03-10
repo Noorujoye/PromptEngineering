@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import TopicCard from '../components/TopicCard'
-import PromptPlayground from '../components/PromptPlayground'
+import TopicCard from '../components/content/TopicCard'
+import PromptPlayground from '../features/playground/PromptPlayground'
 import { TOPICS } from '../data/topics'
 
 export default function Home() {

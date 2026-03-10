@@ -62,10 +62,7 @@ export default function Layout() {
                 }}
               />
               <div className="fixed left-0 top-14 z-30 h-[calc(100vh-56px)] w-[85vw] max-w-[320px]">
-                <Sidebar
-                  topics={visibleTopics}
-                  onNavigate={() => setIsSidebarOpen(false)}
-                />
+                <Sidebar topics={visibleTopics} onNavigate={() => setIsSidebarOpen(false)} />
               </div>
             </div>
           ) : null}
