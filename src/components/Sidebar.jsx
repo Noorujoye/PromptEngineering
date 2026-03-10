@@ -4,34 +4,29 @@ function linkClassName({ isActive }) {
   return [
     'block rounded-md px-3 py-2 text-sm',
     isActive
-      ? 'bg-indigo-50 font-medium text-indigo-900 dark:bg-indigo-950/35 dark:text-indigo-200'
-      : 'text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800/60',
+      ? 'bg-green-50 font-medium text-green-900 dark:bg-green-950/35 dark:text-green-200'
+      : 'text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800/60',
   ].join(' ')
 }
 
-export default function Sidebar({ topics, searchValue, onSearchChange, onNavigate }) {
+export default function Sidebar({ topics, onNavigate }) {
   return (
-    <aside className="h-full border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
-      <div className="border-b border-slate-100 px-4 py-3 dark:border-slate-800">
-        <div className="text-sm font-semibold text-slate-900 dark:text-slate-100">Prompt Engineering</div>
-        <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">Learning topics</div>
+    <aside className="h-full border-r border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="border-b border-zinc-100 px-4 py-4 dark:border-zinc-800">
+        <div className="flex items-start gap-3">
+          <div className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-green-50 text-sm font-bold text-green-700 dark:bg-green-950/35 dark:text-green-200">
+            PP
+          </div>
+          <div className="min-w-0">
+            <div className="truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">PromptPath</div>
+            <div className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">Prompt engineering learning portal</div>
+          </div>
+        </div>
       </div>
 
-      <div className="p-4">
-        <label className="sr-only" htmlFor="topic-search">
-          Search topics
-        </label>
-        <input
-          id="topic-search"
-          value={searchValue}
-          onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Search topics..."
-          className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-100 dark:focus:ring-indigo-900/60"
-        />
-      </div>
-
-      <div className="px-4 pb-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-        Topics
+      <div className="flex items-center justify-between px-4 pb-2 pt-3">
+        <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">Topics</div>
+        <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400">{topics.length}</div>
       </div>
 
       <nav className="space-y-1 px-2 pb-4">

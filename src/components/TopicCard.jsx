@@ -4,12 +4,12 @@ export default function TopicCard({ title, description, to }) {
   return (
     <Link
       to={to}
-      className="group block rounded-lg border border-slate-200 bg-slate-50 p-5 hover:border-indigo-200 hover:bg-white dark:border-slate-800 dark:bg-slate-950 dark:hover:border-indigo-900/40 dark:hover:bg-slate-900"
+      className="group block rounded-lg border border-zinc-200 bg-zinc-50 p-5 hover:border-green-200 hover:bg-white dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-green-900/40 dark:hover:bg-zinc-900"
     >
-      <div className="text-base font-semibold text-slate-900 group-hover:underline dark:text-slate-100">
+      <div className="text-base font-semibold text-zinc-900 group-hover:underline dark:text-zinc-100">
         {title}
       </div>
-      <div className="mt-2 text-sm text-slate-600 dark:text-slate-300">{description}</div>
+      <div className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">{description}</div>
     </Link>
   )
 }

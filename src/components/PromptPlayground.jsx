@@ -43,13 +43,13 @@ export default function PromptPlayground() {
   const response = useMemo(() => (generated ? simulateResponse(generated) : ''), [generated])
 
   return (
-    <section className="rounded-lg border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-950">
-      <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Prompt Playground</h2>
-      <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+    <section className="rounded-lg border border-zinc-200 bg-zinc-50 p-5 dark:border-zinc-800 dark:bg-zinc-950">
+      <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Prompt Playground</h2>
+      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
         Type a prompt and generate a simulated response (no real AI call).
       </p>
 
-      <label className="mt-4 block text-sm font-medium text-slate-700 dark:text-slate-200" htmlFor="playground">
+      <label className="mt-4 block text-sm font-medium text-zinc-700 dark:text-zinc-200" htmlFor="playground">
         Enter Prompt
       </label>
       <textarea
@@ -58,14 +58,14 @@ export default function PromptPlayground() {
         onChange={(e) => setPrompt(e.target.value)}
         rows={5}
         placeholder="e.g., You are a professional teacher. Explain binary search in simple terms."
-        className="mt-2 w-full rounded-md border border-slate-200 bg-white p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-indigo-400/20"
+        className="mt-2 w-full rounded-md border border-zinc-200 bg-white p-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-green-500/20 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:ring-green-400/20"
       />
 
       <div className="mt-3 flex items-center gap-2">
         <button
           type="button"
           onClick={() => setGenerated(prompt)}
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400"
+          className="rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-400"
         >
           Generate Response
         </button>
@@ -75,7 +75,7 @@ export default function PromptPlayground() {
             setPrompt('')
             setGenerated('')
           }}
-          className="rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-800"
+          className="rounded-md border border-zinc-200 px-3 py-2 text-sm text-zinc-700 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-800"
         >
           Clear
         </button>
@@ -83,8 +83,8 @@ export default function PromptPlayground() {
 
       {generated ? (
         <div className="mt-4">
-          <div className="text-sm font-medium text-slate-700 dark:text-slate-200">Response</div>
-          <pre className="mt-2 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">{response}</pre>
+          <div className="text-sm font-medium text-zinc-700 dark:text-zinc-200">Response</div>
+          <pre className="mt-2 overflow-x-auto rounded-lg bg-zinc-900 p-4 text-sm text-zinc-100">{response}</pre>
         </div>
       ) : null}
     </section>

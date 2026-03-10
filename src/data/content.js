@@ -2,233 +2,429 @@ export const CONTENT_BY_ID = {
   basics: `# Prompt Engineering Basics
 
 ## Introduction
-Prompt Engineering is the practice of designing inputs (prompts) that guide an AI model to produce useful outputs.
+Prompt Engineering is the practice of writing **clear, structured prompts** so an AI model produces outputs that are accurate, useful, and consistent.
+
+In simple words: a prompt is not just a question — it’s a *specification*.
 
 ## Core Concepts
 
 ### What is a prompt?
-A ..... is the input you give an AI model to guide what it should do. Prompts can be a single sentence, a set of instructions, a structured template, or a full conversation.
+A **prompt** is the input you provide to guide the model. It can be a single sentence, a multi-step instruction, a template, or an entire conversation.
 
-### How AI interprets prompts
-Modern language models respond by predicting the most likely next tokens based on:
-- The text you provide (instructions + context)
-- The conversation history (if any)
-- Patterns learned during training
+### Prompt anatomy (the parts that make prompts reliable)
+Most strong prompts include these building blocks:
+- **Task / instruction**: what to do
+- **Context**: background information the model should use
+- **Constraints**: what to include/exclude (tone, length, do/don’t)
+- **Examples** (optional): show the pattern you want
+- **Output format**: bullets, table, code, JSON, etc.
 
-In practice, the model **does not “understand” like a human**—it follows patterns in the input and generates a response that best matches those patterns.
+### Why structure matters
+Structured prompts reduce ambiguity and increase repeatability:
+- The model doesn’t "know what you mean" unless you specify
+- Output formats reduce random formatting
+- Constraints prevent irrelevant or overly long answers
 
-### Why prompt structure matters
-Good prompts reduce ambiguity by:
-- Stating the task clearly
-- Providing the right context
-- Specifying constraints (tone, length, audience)
-- Defining the output format (bullets, table, code, JSON)
+## A Reusable Prompt Template
+Use this template for most tasks:
+
+~~~text
+Role: [optional]
+Task: [what you want]
+Context: [relevant details]
+Constraints: [tone/length/do-don’t]
+Output format: [bullets/table/JSON/code]
+~~~
 
 ## Examples
 
-**Prompt**
+### Example 1 — Explanation + bullets
 ~~~text
-Explain recursion in Java with a simple example.
+Task: Explain recursion.
+Audience: Beginner Java students.
+Constraints: Use 5 bullet points and one small Java snippet.
 ~~~
 
-**Output (example)**
+### Example 2 — Summarization with sections
 ~~~text
-Recursion is a programming technique where a method calls itself.
+Task: Summarize the topic below.
+Constraints: Keep it under 120 words.
+Output format:
+- Definition:
+- Why it matters:
+- Example:
 
-Example:
-A factorial function computes n! by calling factorial(n-1) until it reaches 1.
+Topic:
+[PASTE TEXT]
 ~~~
+
+### Example 3 — Data extraction as JSON
+~~~text
+Task: Extract structured data.
+Constraints: Output valid JSON only.
+Schema:
+{
+  "name": string,
+  "email": string | null,
+  "skills": string[]
+}
+
+Text:
+[PASTE RESUME PARAGRAPH]
+~~~
+
+## Common Mistakes
+- **Too vague**: “Explain AI” → unclear scope and audience
+- **Missing format**: output becomes inconsistent across runs
+- **No constraints**: model may be too long, too short, or off-topic
+- **No context**: model guesses details you actually know
+
+## Quick Checklist
+- Did I state the task in one sentence?
+- Did I add the right context (not everything, only what matters)?
+- Did I set constraints (tone/length/what to avoid)?
+- Did I specify the output format?
 
 ## Summary
-- Prompts are instructions + context.
-- Structure improves clarity and consistency.
-- Output formats help you get predictable results.
+- Prompts work best when treated like specifications.
+- The fastest wins come from structure: task + context + constraints + format.
 `,
 
   'prompt-types': `# Prompt Types
 
 ## Introduction
-Prompting is not one thing—different styles work better depending on the task and how much guidance the model needs.
+Different prompt types provide different levels of guidance. Choosing the right type makes outputs more reliable and reduces back-and-forth.
 
 ## Core Concepts
 
 ### Zero-shot prompting
-You ask the model to do a task with **no examples**.
+You provide **only the instruction** (no examples). Best for simple, common tasks.
 
 ### Few-shot prompting
-You provide **a few examples** so the model learns the pattern.
+You include **a few examples** that demonstrate the pattern you want. Best for formatting and consistency.
 
-### Chain-of-thought prompting
-You ask the model to solve a problem **step by step**.
+### Role (persona) prompting
+You assign a role to shape voice and priorities (e.g., “Act as a tutor”). Best for tone and decision-making.
+
+### Structured prompting
+You require a specific output format (template, table, JSON). Best for automation and reuse.
+
+### Step-by-step prompting (procedural)
+You request a *process* (steps, checklist, algorithm) rather than a single answer. Best for multi-step tasks.
+
+Note: Some AI systems may not provide detailed internal reasoning. A practical alternative is to ask for **steps, key assumptions, and a brief justification**.
 
 ## Examples
 
-**Zero-shot example**
+### Zero-shot
 ~~~text
-Translate the following sentence to French:
-"I am learning prompt engineering."
+Task: Explain what prompt engineering is.
+Audience: First-year CS students.
+Constraints: 120 words max.
 ~~~
 
-**Few-shot example**
+### Few-shot (format learning)
 ~~~text
-2 + 2 = 4
-3 + 3 = 6
+Output format:
+- Term:
+- Definition:
+- Example:
 
-Now solve:
-4 + 4 =
+Example:
+- Term: Overfitting
+- Definition: When a model memorizes training data and performs poorly on new data.
+- Example: High training accuracy, low test accuracy.
+
+Now write the same format for: "Prompt Engineering"
 ~~~
 
-**Chain-of-thought example**
+### Role prompting
 ~~~text
-Solve the problem step by step.
-If a store discount is 20% on a $50 item, what is the final price?
+Role: You are an interview coach.
+Task: Help me answer "Tell me about yourself" for an AI internship.
+Constraints: 120–150 words, confident but not arrogant.
+~~~
+
+### Structured prompting (JSON)
+~~~text
+Task: Extract action items.
+Constraints: Output valid JSON only.
+Schema: { "actions": [{ "owner": string, "task": string, "due": string | null }] }
+
+Text:
+[PASTE MEETING NOTES]
+~~~
+
+### Step-by-step
+~~~text
+Task: Design a prompt to summarize a research paper.
+Constraints:
+1) Provide steps.
+2) Provide the final prompt template.
+3) Include what to do if the paper is too long.
 ~~~
 
 ## Summary
-- Zero-shot: fastest, least guidance.
-- Few-shot: teaches a pattern.
-- Step-by-step: helps with multi-step reasoning tasks.
+- Zero-shot is fastest.
+- Few-shot is best for consistent formatting.
+- Role prompts shape tone and priorities.
+- Structured/step-by-step prompts are best for reliable workflows.
 `,
 
   techniques: `# Prompt Engineering Techniques
 
 ## Introduction
-Techniques are reusable prompt patterns that improve reliability, clarity, and formatting.
+Techniques are repeatable patterns you can apply to make prompts clearer and outputs more dependable.
 
-## Core Concepts
+## Core Techniques
 
-### Role prompting
-Assign a role so the model adopts the right voice and priorities.
+### 1) Role + goal
+Set a role and a concrete goal.
 
-### Instruction prompting
-Give clear, direct instructions and constraints.
+~~~text
+Role: You are a senior frontend reviewer.
+Task: Review my React component for accessibility issues.
+~~~
 
-### Structured prompting
-Use a template so the output is predictable.
+### 2) Delimiters (separating input from instructions)
+Wrap pasted text/code so the model doesn’t confuse it with instructions.
 
-### Step-by-step reasoning
-For complex tasks, break down the work.
+~~~text
+Task: Summarize the text.
+Text:
+"""
+[PASTE TEXT HERE]
+"""
+~~~
+
+### 3) Constraints (do/don’t + scope)
+Add limits to prevent rambling or irrelevant content.
+
+~~~text
+Constraints:
+- Keep under 150 words
+- Do not invent facts
+- Use simple language
+~~~
+
+### 4) Structured outputs (templates / schemas)
+Great for consistent results and automation.
+
+~~~text
+Output format:
+- Definition:
+- Key points (3 bullets):
+- Example:
+~~~
+
+### 5) Decomposition (break into steps)
+For complex tasks, ask for a plan and then the final answer.
+
+~~~text
+Task: Create a study plan to learn prompt engineering.
+Output:
+1) 7-day plan (daily tasks)
+2) Recommended practice prompts
+3) Common mistakes to avoid
+~~~
+
+### 6) Verification prompts
+Ask the model to check its own output against a checklist.
+
+~~~text
+Task: Produce the answer, then verify:
+- Did you follow the requested format?
+- Did you include all constraints?
+- Did you avoid unsupported claims?
+~~~
 
 ## Examples
 
-**Role prompting**
+### Example — Networking explanation
 ~~~text
-You are a professional teacher.
-Explain binary search in simple terms.
+Task: Explain TCP vs UDP.
+Audience: Beginners.
+Constraints: 6 bullet points + one short analogy.
 ~~~
 
-**Instruction prompting**
+### Example — Code review
 ~~~text
-Explain the difference between TCP and UDP.
-Use 5 bullet points. Keep it beginner-friendly.
-~~~
+Role: You are a code reviewer.
+Task: Review the code below for edge cases and performance.
+Constraints: Provide 5 findings, each with severity (Low/Med/High).
 
-**Structured prompting**
-~~~text
-Summarize the topic below using this format:
-- Definition:
-- Why it matters:
-- Example:
-
-Topic: Overfitting in machine learning
-~~~
-
-**Step-by-step reasoning**
-~~~text
-Given the code snippet below, do the following:
-1) Explain what it does
-2) Identify edge cases
-3) Suggest improvements
-
-[PASTE CODE HERE]
+Code:
+"""
+[PASTE CODE]
+"""
 ~~~
 
 ## Summary
-- Choose a technique based on what you need: tone, structure, or reliability.
-- Templates and constraints make outputs predictable.
+- Use role + goal to set direction.
+- Use delimiters and constraints to reduce confusion.
+- Use structured output and verification for consistency.
 `,
 
   examples: `# Prompt Examples
 
 ## Introduction
-Use these prompts as starting points, then customize them with context, constraints, and output formats.
+Below are ready-to-use prompts. The best way to use them is to keep the structure and replace the context.
 
-## Core Concepts
-
-### How to customize a prompt
-For best results, add:
-- **Audience** (beginner, student, developer)
-- **Tone** (formal, friendly, concise)
-- **Constraints** (length, do/don’t do)
-- **Output format** (bullets, steps, table, JSON)
+## Quick Tip
+If you want consistent outputs, always specify:
+- Audience
+- Constraints (length / do-don’t)
+- Output format
 
 ## Examples
 
-### Programming prompts
+### 1) Study notes (structured)
 ~~~text
-Write a Java program to reverse a linked list.
+Task: Turn the topic below into study notes.
+Audience: Beginner.
+Output format:
+- Definition:
+- Key concepts (5 bullets):
+- Example:
+- Common mistakes:
+- 3 quick questions to self-test:
+
+Topic: Prompt Engineering
 ~~~
 
+### 2) Coding explanation (beginner-friendly)
 ~~~text
-Explain time complexity for binary search and linear search.
-Include Big-O and a short intuitive explanation.
+Role: You are a patient tutor.
+Task: Explain binary search.
+Constraints: Use a simple example and provide time complexity.
+Output format: 6 bullet points + one short code snippet.
 ~~~
 
-### Content writing prompts
+### 3) Writing (tone control)
 ~~~text
-Act as a professional copywriter.
-Write a product description for a smartwatch.
-Target audience: busy professionals.
-Tone: confident and concise.
+Role: You are a professional copywriter.
+Task: Write a product description for a smartwatch.
+Audience: Busy professionals.
+Constraints: 120–160 words, confident tone, avoid buzzwords.
 ~~~
 
-### Educational prompts
+### 4) Data extraction (JSON)
 ~~~text
-Explain Newton’s laws using simple real-world examples.
-Keep it suitable for a 12-year-old.
+Task: Extract entities from the text.
+Constraints: Output valid JSON only, do not add extra keys.
+Schema:
+{
+  "people": string[],
+  "organizations": string[],
+  "dates": string[],
+  "locations": string[]
+}
+
+Text:
+[PASTE TEXT]
+~~~
+
+### 5) Comparing options (decision support)
+~~~text
+Task: Compare the options below.
+Constraints: Use a table and end with a recommendation + 2 reasons.
+
+Options:
+1) [Option A]
+2) [Option B]
+3) [Option C]
 ~~~
 
 ## Summary
-- Add audience + tone + format for better results.
-- Reuse proven templates and adjust constraints.
+- Good prompts are reusable templates.
+- Structure (format + constraints) is what makes prompts production-friendly.
 `,
 
   'best-practices': `# Best Practices
 
 ## Introduction
-Best practices make prompts easier to understand and outputs easier to use.
+Best practices help you get consistent, high-quality answers and reduce the time spent re-prompting.
 
-## Core Concepts
+## Core Best Practices
 
-### Be specific
-Vague prompts produce vague answers. Specify what you want.
+### 1) Be specific about the task
+Instead of “Explain prompt engineering”, specify scope:
+- depth (overview vs detailed)
+- audience (beginner vs advanced)
+- success criteria (what a good answer contains)
 
-### Provide context
-Tell the model who the audience is, what level to target, and why you need the output.
+### 2) Add only the context that matters
+Context improves accuracy, but too much context creates noise. Include:
+- what you already know
+- what you need the output for
+- constraints (tools, language, format)
 
-### Define the output format
-If you want bullets, code, JSON, or a table—say so.
+### 3) Define the output format
+If you want reliability, don’t leave formatting to chance.
 
-### Use examples
-Examples reduce ambiguity and teach the pattern.
+~~~text
+Output format:
+1) Short summary (2 lines)
+2) Key points (5 bullets)
+3) Example
+4) Checklist
+~~~
+
+### 4) Use examples (few-shot) when formatting matters
+Examples teach the pattern faster than explanations.
+
+### 5) Add “do / don’t” constraints
+This prevents hallucinations and off-topic content.
+
+~~~text
+Constraints:
+- If you are unsure, say what is missing.
+- Do not invent statistics.
+- Keep the tone neutral and professional.
+~~~
+
+### 6) Iterate with a feedback loop
+Treat prompting like debugging:
+1) Ask for a first draft
+2) Point out what’s wrong (missing sections, too long, wrong tone)
+3) Request a revision with exact constraints
 
 ## Examples
 
-### Example comparison
-**Bad prompt**
+### Example — vague vs precise
+**Bad**
 ~~~text
 Explain AI.
 ~~~
 
-**Better prompt**
+**Better**
 ~~~text
-Explain Artificial Intelligence in simple terms with 3 real-world examples.
-Audience: high school students.
-Keep it under 150 words.
+Task: Explain Artificial Intelligence.
+Audience: High school students.
+Constraints: Under 150 words.
+Output format: Definition + 3 real-world examples + 1 limitation.
 ~~~
 
+### Example — preventing invented details
+~~~text
+Task: Summarize the article below.
+Constraints:
+- Use only the information provided.
+- If a fact is not stated, write "Not specified".
+Text:
+[PASTE ARTICLE]
+~~~
+
+## Quick Checklist
+- Clear task?
+- Correct audience?
+- Enough context (but not too much)?
+- Output format specified?
+- Do/don’t constraints included?
+- One example included when pattern matters?
+
 ## Summary
-- Specificity + context + format = better outputs.
-- Examples reduce ambiguity and improve consistency.
+- Specificity + context + format + constraints are the biggest quality levers.
+- Use iteration and checklists to make prompts production-ready.
 `,
 }
